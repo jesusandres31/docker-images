@@ -1,0 +1,83 @@
+/* 
+Error while pull from git - insufficient permission for adding an object to repository database .git/objects
+https://stackoverflow.com/questions/18779442/error-while-pull-from-git-insufficient-permission-for-adding-an-object-to-repo
+sudo chown -R $USER:$USER "$(git rev-parse --show-toplevel)/.git" 
+*/
+
+// GoogleCloud conf
+def BRANCH = "master"
+def AGENT = "gcloud-liber-staging"
+def REPO = "liber-production"
+def WORKSPACE = "/home/jesus_zini/liber/${REPO}" 
+
+// DonWeb conf
+/* def BRANCH = "master"
+def AGENT = "donweb-liber-production"
+def REPO = "liber-production"
+def WORKSPACE = "/home/Liber/${REPO}" */
+
+pipeline { 
+    agent { label AGENT } 
+
+    // prevent checkout on ".../jenkins/workspace/..." 
+    options { skipDefaultCheckout() } 
+
+    stages { 
+        stage("deploy") {  
+
+            when {
+                expression { 
+                    BRANCH_NAME == BRANCH 
+                }
+            } 
+
+            steps {
+
+                // move to workspace dir
+                dir(WORKSPACE) { 
+                
+                    // git pull on current dir 
+                    checkout scm 
+
+                    echo "Deploying the application..." 
+                
+                    // starts script
+                    sh '''#!/bin/bash
+                         
+                        echo 'changing directory...' 
+                        cd ../
+ 
+                        pwd
+                        echo '''+BRANCH+''' 
+    
+                        #echo 'creating file...' 
+                        #echo "'''+BRANCH+'''" > molotov.txt
+
+                        echo " "
+                        curl ifconfig.me
+
+                        sudo docker ps | grep liber
+                        echo " "
+                        echo "done!"
+
+                    ''' 
+                }
+                 
+            }
+
+            post {
+                always {
+
+                    // move to just created tmp dir
+                    dir("${WORKSPACE}@tmp") {
+                        
+                        // recursive remove tmp dir
+                        deleteDir()
+                    } 
+                }
+            }
+
+        }  
+    }   
+   
+}

@@ -1,5 +1,10 @@
-# Other Images
+# Docker and Bash
 
-#### Internet Monitoring Docker Stack with Prometheus + Grafana
+- Docker images used in some projects. 👨‍💻 🐋 🚀
+- Bash script for deployment or task automation. 💻 🦾 🤖 ⚙️
 
-- `https://github.com/geerlingguy/internet-monitoring`
+<br>
+
+### Other repos
+
+- [Internet Monitoring Docker Stack with Prometheus + Grafana](https://github.com/geerlingguy/internet-monitoring)
