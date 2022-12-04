@@ -1,7 +1,4 @@
-# Docker and Bash
-
-- Docker images used in some projects. 👨‍💻 🐋 🚀
-- Bash script for deployment and task automation. 💻 🦾 🤖 ⚙️
+# Docker images used in some projects
 
 <br>
 
