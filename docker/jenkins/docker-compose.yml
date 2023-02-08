@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:alpine # official image
+    ports:
+      - '8888:8080' # by default runs on that port
+      - '50000:50000' # Master/Slave communication
+    volumes:
+      - jenkins_home:/var/jenkins_home # persist data of Jenkins
+    restart: always
+
+volumes:
+  jenkins_home:
