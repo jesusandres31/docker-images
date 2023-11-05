@@ -1,22 +1,6 @@
-# usr: admin
-# pss: root
+# docker-compose up -d
 
-# bugfix:
-# https://stackoverflow.com/questions/51445846/elasticsearch-max-virtual-memory-areas-vm-max-map-count-65530-is-too-low-inc
-
-# run:
-# install "sonar-scanner" in localhost
-# add "sonar-scanner" to your path var
-# add "sonar-project.properties" file in root path of the project
-# run "sonar-scanner"
-
-# "sonar-project.properties" example:
-# sonar.projectKey=yourproject  
-# sonar.projectName=yourproject
-# sonar.projectVersion=0.1
-# sonar.sources=src/
-
-version: '3'
+version: "3"
 
 services:
   sonarqube:
@@ -32,7 +16,7 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/logs
     ports:
-      - '9000:9000'
+      - "9000:9000"
 
   db:
     image: postgres:12
